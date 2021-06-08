@@ -1,0 +1,8 @@
+{
+  "REQUIRED_FIELD": "Campo obrigatório",
+  "MAX_LENGTH": "Deve ter {{length}} caracteres ou menos.",
+  "MIN_LENGTH": "Deve ter {{length}} caracteres ou mais.",
+  "INVALID_EMAIL": "E-mail inválido.",
+  "MISMATCH_FIELD": "Campos devem ser iguais.",
+  "PASSWORD_STRENGTH": "A senha deve ter letras maiúsculas, minúsculas, números e pelo menos um caracter especial."
+}

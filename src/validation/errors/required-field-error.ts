@@ -1,7 +1,8 @@
-export class RequiredFieldError extends Error {
-  constructor (error: string) {
-    super('RequiredFieldError')
-    this.name = 'RequiredFieldError'
-    this.message = error
+import { ValidationErrorType } from '~/presentation/common/protocols'
+import { ValidationError } from '../protocols'
+
+export class RequiredFieldError extends ValidationError {
+  constructor(error: ValidationErrorType) {
+    super('RequiredFieldError', error)
   }
 }

@@ -1,41 +1,46 @@
-import React, { useMemo } from 'react'
-import { Box, BoxProps, TextField, TextFieldProps } from '@material-ui/core'
-import { useForm } from '~/presentation/hooks'
+import React from 'react'
+import { Controller, Control } from 'react-hook-form'
+import { TextField, TextFieldProps } from '@material-ui/core'
+import { ValidationErrorType } from '~/presentation/common/protocols'
+import { useTranslation } from '~/presentation/hooks'
 
 type Props = TextFieldProps & {
-  styleProps?: BoxProps
   name: string
+  control: Control<any>
   label: string
 }
 
-const TextInput: React.FC<Props> = ({ name, label, styleProps, ...props }) => {
-  const { form, errors, handleChange } = useForm()
-
-  const value = useMemo(() => form[name], [form, name])
-  const error = useMemo(() => errors[name], [errors, name])
-
-  const onChange = (
-    event: React.ChangeEvent<HTMLTextAreaElement | HTMLInputElement>
-  ): void => {
-    const { name, value } = event.target
-    handleChange({ name, value })
-  }
-
+const TextInput = ({
+  name,
+  defaultValue,
+  control,
+  label,
+  ...inputProps
+}: Props) => {
+  const { translate } = useTranslation('exceptions')
   return (
-    <Box {...styleProps}>
-      <TextField
-        fullWidth
-        onChange={onChange}
-        name={name}
-        label={label}
-        value={value}
-        error={!!error}
-        helperText={error || ' '}
-        inputProps={{ ...props.inputProps, 'data-testid': name }}
-        FormHelperTextProps={{ title: `${name}-helper` }}
-        {...props}
-      />
-    </Box>
+    <Controller
+      name={name}
+      control={control}
+      defaultValue=''
+      render={({ field, fieldState: { error, invalid } }) => {
+        const errorState = error as unknown as ValidationErrorType
+
+        const errorMessage = errorState?.name || ''
+        const errorOption = errorState?.option
+
+        return (
+          <TextField
+            {...inputProps}
+            {...field}
+            label={translate(label)}
+            fullWidth
+            error={invalid}
+            helperText={invalid ? translate(errorMessage, errorOption) : ''}
+          />
+        )
+      }}
+    />
   )
 }
 

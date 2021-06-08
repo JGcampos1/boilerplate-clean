@@ -1,13 +1,21 @@
-import { useContext } from 'react'
-import { FormContextProps } from '~/presentation/common/types'
-import { FormContext } from '~/presentation/contexts'
+import { useForm as useFormRHF, Resolver, FieldValues } from 'react-hook-form'
+import { Validation } from '../common/protocols'
+import { useValidationResolver } from './use-validation-resolver'
 
-export const useForm = <T = any, R = any>(): FormContextProps<T, R> => {
-  const context = useContext(FormContext)
+type UseFormParams = {
+  validationSchema?: Validation
+  mode: 'all' | 'onBlur' | 'onChange' | 'onSubmit' | 'onTouched'
+}
 
-  if (!context) {
-    throw new Error('useForm must be used within a FormProvider')
-  }
+export const useForm = <T extends FieldValues>({
+  validationSchema,
+  mode
+}: UseFormParams) => {
+  const resolver = useValidationResolver(
+    validationSchema
+  ) as unknown as Resolver<T, object>
 
-  return context
+  const { control, handleSubmit } = useFormRHF<T>({ resolver, mode })
+
+  return { control, handleSubmit }
 }

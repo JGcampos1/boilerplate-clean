@@ -1,9 +1,9 @@
-import { Authentication } from '~/domain/modules'
+import { UserModel } from './'
 
 export type TokenModel = {
-  provider: Authentication.Provider
   accessToken: string
-  expiresIn: number
+  expiresIn: number | null
   refreshToken: string
-  refreshTokenExpiresIn: number
+  refreshTokenExpiresIn: number | null
+  user: UserModel | null
 }

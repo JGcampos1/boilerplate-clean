@@ -3,15 +3,15 @@ export type Either<L, R> = Error<L, R> | Success<L, R>
 export class Error<L, R> {
   readonly value: L
 
-  constructor (value: L) {
+  constructor(value: L) {
     this.value = value
   }
 
-  isError (): this is Error<L, R> {
+  isError(): this is Error<L, R> {
     return true
   }
 
-  isSuccess (): this is Success<L, R> {
+  isSuccess(): this is Success<L, R> {
     return false
   }
 }
@@ -19,15 +19,15 @@ export class Error<L, R> {
 export class Success<L, R> {
   readonly value: R
 
-  constructor (value: R) {
+  constructor(value: R) {
     this.value = value
   }
 
-  isError (): this is Error<L, R> {
+  isError(): this is Error<L, R> {
     return false
   }
 
-  isSuccess (): this is Success<L, R> {
+  isSuccess(): this is Success<L, R> {
     return true
   }
 }

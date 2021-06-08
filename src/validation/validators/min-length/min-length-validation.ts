@@ -1,17 +1,15 @@
 import { InvalidFieldError } from '~/validation/errors'
-import { FieldValidation } from '~/validation/protocols'
+import { FieldValidation, ValidationError } from '~/validation/protocols'
 
 export class MinLegthValidation implements FieldValidation {
-  constructor (readonly field: string, private readonly minLength: number) {}
+  constructor(readonly field: string, private readonly minLength: number) {}
 
-  validate (input: FieldValidation.Params): Error {
+  validate(input: object): ValidationError | undefined {
     return input[this.field]?.length < this.minLength
-      ? new InvalidFieldError(
-        JSON.stringify({
-          error: 'errors.minLength',
+      ? new InvalidFieldError({
+          name: 'exceptions:MIN_LENGTH',
           option: { length: this.minLength }
         })
-      )
-      : null
+      : undefined
   }
 }

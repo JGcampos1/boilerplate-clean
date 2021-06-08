@@ -1,27 +1,40 @@
-import React from 'react'
 import { Box, Button } from '@material-ui/core'
+import { ValidationTypes } from '~/ioc/types/validation'
+import { emailSignIn } from '~/store/features/auth/actions'
 import { Validation } from '~/presentation/common/protocols'
 import { TextInput } from '~/presentation/components'
-import { useForm, useTranslation } from '~/presentation/hooks'
+import { useAppDispatch, useForm, useTranslation } from '~/presentation/hooks'
+import { useService } from '~/presentation/hooks/use-service'
 
-type Props = {
-  validation: Validation
-}
+const LoginForm = () => {
+  const validationSchema = useService<Validation>(
+    ValidationTypes.AUTH.SIGN_IN_FORM
+  )
+  const dispatch = useAppDispatch()
+  const { control, handleSubmit } = useForm({
+    mode: 'onBlur',
+    validationSchema
+  })
 
-const LoginForm: React.FC<Props> = () => {
   const { translate } = useTranslation()
-  const { onSubmit } = useForm()
+
+  const onSubmit = async (values: { email: string; password: string }) => {
+    dispatch(emailSignIn(values))
+  }
+
   return (
-    <form role='form' onSubmit={onSubmit}>
+    <form onSubmit={handleSubmit(onSubmit)}>
       <div>
         <TextInput
+          control={control}
           name='email'
-          label={translate('common.email')}
+          label={'common:EMAIL'}
           autoComplete='email'
         />
         <TextInput
+          control={control}
           name='password'
-          label={translate('common.password')}
+          label={'common:PASSWORD'}
           type='password'
           autoComplete='current-password'
         />

@@ -1,4 +1,4 @@
-import React, { useMemo, useState } from 'react'
+import { useMemo, useState } from 'react'
 import { MdBrightness4, MdBrightness7 } from 'react-icons/md'
 import { MuiThemeProvider } from '@material-ui/core'
 import { ThemeContext } from '~/presentation/contexts'

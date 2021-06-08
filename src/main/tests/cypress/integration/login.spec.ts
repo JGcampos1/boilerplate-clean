@@ -21,13 +21,9 @@ describe('LoginPage', () => {
   })
 
   it('Should present error state if form is invalid', () => {
-    cy.getByTestId('email')
-      .type(faker.internet.email())
-      .clear()
+    cy.getByTestId('email').type(faker.internet.email()).clear()
     Helpers.testInputStatus('email-helper', 'Campo obrigatório.')
-    cy.getByTestId('password')
-      .type(faker.internet.password())
-      .clear()
+    cy.getByTestId('password').type(faker.internet.password()).clear()
     Helpers.testInputStatus('password-helper', 'Campo obrigatório.')
     cy.getByTestId('password').type(faker.random.alphaNumeric(2))
     cy.get('[title="password-helper"]').should(
@@ -78,16 +74,14 @@ describe('LoginPage', () => {
     LoginMock.mockOk()
     simulateValidSubmit()
     cy.getByTestId('login-toast').should('not.exist')
-    cy.window().then(window =>
+    cy.window().then((window) =>
       assert.isOk(window.localStorage.getItem('token'))
     )
   })
 
   it('Should not call submit if form is invalid', () => {
     LoginMock.mockOk()
-    cy.getByTestId('email')
-      .type(faker.internet.email())
-      .type('{enter}')
+    cy.getByTestId('email').type(faker.internet.email()).type('{enter}')
     Helpers.testHttpCallsCount(0)
   })
 })

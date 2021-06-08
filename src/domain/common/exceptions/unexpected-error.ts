@@ -1,7 +1,7 @@
 export class UnexpectedError extends Error {
-  constructor () {
+  constructor(message?: string) {
     super('UnexpectedError')
     this.name = 'UnexpectedError'
-    this.message = 'errors.unexpectedError'
+    this.message = message ?? 'exceptions:UNEXPECTED_ERROR'
   }
 }

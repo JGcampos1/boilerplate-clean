@@ -1,1 +1,1 @@
-export * from './local-storage/local-storage-adapter'
+export * from './local-storage/local-storage-cache-storage'

@@ -1,12 +1,14 @@
 import axios, { AxiosResponse } from 'axios'
+import { injectable } from 'inversify'
 import {
   HttpResponse,
   HttpClient,
   HttpRequest
 } from '~/application/protocols/http'
 
+@injectable()
 export class AxiosHttpClient implements HttpClient {
-  async request ({
+  async request({
     method,
     url,
     body,

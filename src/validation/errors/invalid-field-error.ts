@@ -1,7 +1,8 @@
-export class InvalidFieldError extends Error {
-  constructor (error: string) {
-    super('InvalidFieldError')
-    this.name = 'InvalidFieldError'
-    this.message = error
+import { ValidationErrorType } from '~/presentation/common/protocols'
+import { ValidationError } from '../protocols'
+
+export class InvalidFieldError extends ValidationError {
+  constructor(error: ValidationErrorType) {
+    super('InvalidFieldError', error)
   }
 }

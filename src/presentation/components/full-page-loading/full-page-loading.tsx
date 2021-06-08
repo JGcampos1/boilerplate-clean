@@ -1,7 +1,7 @@
 import React from 'react'
 import { Box, CircularProgress, CssBaseline } from '@material-ui/core'
 
-const FullPageLoading: React.FC = () => {
+const FullPageLoading = () => {
   return (
     <Box
       width='100vw'

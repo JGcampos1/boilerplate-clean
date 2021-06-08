@@ -1,20 +1,22 @@
+import { injectable } from 'inversify'
 import { TokenModel } from '~/domain/models'
-import { GetStorage } from '~/application/protocols/cache'
+import { CacheStorage } from '~/application/protocols/cache'
 import {
   HttpClient,
   HttpRequest,
   HttpResponse
 } from '~/application/protocols/http'
 
+@injectable()
 export class AuthorizeHttpClientDecorator implements HttpClient {
-  constructor (
+  constructor(
     private readonly tokenPath: string,
-    private readonly getStorage: GetStorage,
+    private readonly cacheStorage: CacheStorage,
     private readonly httpGetClient: HttpClient
   ) {}
 
-  async request (data: HttpRequest): Promise<HttpResponse> {
-    const token: TokenModel = this.getStorage.get(this.tokenPath)
+  async request(data: HttpRequest): Promise<HttpResponse> {
+    const token = this.cacheStorage.get<TokenModel>(this.tokenPath)
     if (token.accessToken) {
       Object.assign(data, {
         headers: Object.assign(data.headers || {}, {

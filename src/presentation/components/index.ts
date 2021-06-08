@@ -1,5 +1,4 @@
-export { default as Toast } from './toast/toast'
 export { default as TextInput } from './text-input/text-input'
 export { default as ProtectRoute } from './protect-route/protect-route'
-export { default as ToastContainer } from './toast-container/toast-container'
 export { default as FullPageLoading } from './full-page-loading/full-page-loading'
+export { default as AuthGate } from './auth-gate/auth-gate'

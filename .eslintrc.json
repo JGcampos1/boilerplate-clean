@@ -7,9 +7,11 @@
   "extends": [
     "standard-with-typescript",
     "plugin:react/recommended",
+    "plugin:prettier/recommended",
+    "eslint-config-prettier",
     "plugin:cypress/recommended"
   ],
-  "plugins": ["react", "import-helpers", "cypress"],
+  "plugins": ["react", "import-helpers", "prettier", "cypress"],
   "parserOptions": {
     "project": "./tsconfig-eslint.json"
   },
@@ -17,6 +19,12 @@
     "cypress/globals": true
   },
   "rules": {
+    "prettier/prettier": [
+      "error",
+      { "trailingComma": "none", "singleQuote": true, "jsxSingleQuote": true }
+    ],
+    "@typescript-eslint/no-invalid-void-type": "off",
+    "@typescript-eslint/explicit-function-return-type": "off",
     "@typescript-eslint/no-unnecessary-type-assertion": "off",
     "@typescript-eslint/consistent-type-definitions": "off",
     "@typescript-eslint/strict-boolean-expressions": "off",
@@ -27,6 +35,7 @@
     "@typescript-eslint/no-namespace": "off",
     "@typescript-eslint/no-redeclare": "off",
     "@typescript-eslint/camelcase": "off",
+    "react/react-in-jsx-scope": "off",
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "react/prop-types": "off",

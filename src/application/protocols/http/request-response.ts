@@ -3,21 +3,21 @@ import {
   InvalidCredentialsError,
   UnexpectedError
 } from '~/domain/common/exceptions'
+import { Response, ResponseError } from '~/domain/common/types'
 import {
   CombinedPredicated,
   combinedPredicates,
   error,
   success
 } from '~/domain/common/utils'
-import { Response, ResponseError } from '~/domain/models'
 import { HttpResponse, HttpStatusCode } from '~/application/protocols/http'
 
 export class RequestResponse<R> {
-  private constructor (private readonly _response: R) {
+  private constructor(private readonly _response: R) {
     Object.freeze(this)
   }
 
-  public static handle<R> (
+  public static handle<R>(
     httpResponse: HttpResponse<R>
   ): Response<RequestResponse<R>> {
     const { statusCode } = httpResponse
@@ -43,19 +43,19 @@ export class RequestResponse<R> {
     return error(new UnexpectedError())
   }
 
-  private static isSuccess (statusCode: HttpStatusCode): boolean {
+  private static isSuccess(statusCode: HttpStatusCode): boolean {
     return statusCode >= 200 && statusCode <= 299
   }
 
-  private static isForbidden (statusCode: HttpStatusCode): boolean {
+  private static isForbidden(statusCode: HttpStatusCode): boolean {
     return statusCode === HttpStatusCode.forbidden
   }
 
-  private static isUnauthorized (statusCode: HttpStatusCode): boolean {
+  private static isUnauthorized(statusCode: HttpStatusCode): boolean {
     return statusCode === HttpStatusCode.unauthorized
   }
 
-  get response (): R {
+  get response(): R {
     return this._response
   }
 }

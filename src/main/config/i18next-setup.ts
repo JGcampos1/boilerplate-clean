@@ -11,7 +11,8 @@ const translationOptions: InitOptions = {
   debug: false,
   supportedLngs: availableLanguages,
   fallbackLng: 'pt-BR',
-  defaultNS: 'translation',
+  defaultNS: 'common',
+  ns: ['common'],
   react: {
     useSuspense: true
   },

@@ -1,13 +1,18 @@
 import { lazy } from 'react'
+import { IRoute } from '~/main/types'
 
-export const RouteConfig = {
-  login: {
+export const RoutesConfig: IRoute[] = [
+  {
+    name: 'home',
     path: '/',
-    title: 'Login',
-    private: false,
-    component: lazy(async () =>
-      import('~/main/factories/pages/login-page/login-page-factory')
-    ),
-    layout: 'DefaultLayout'
+    exact: true,
+    private: true,
+    component: lazy(async () => import('~/presentation/pages/home/home'))
+  },
+  {
+    name: 'login',
+    path: '/login',
+    exact: true,
+    component: lazy(async () => import('~/presentation/pages/login/login'))
   }
-}
+]
