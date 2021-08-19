@@ -1,5 +1,7 @@
 import { createAction } from '@reduxjs/toolkit'
-import { StoreProps } from '../types'
 
-export const resetState = (sliceName: keyof StoreProps['reducers']) =>
-  createAction(`${sliceName}/resetState`)()
+import { store } from '../store'
+
+export const resetState = (
+  sliceName: keyof ReturnType<typeof store.getState>
+) => createAction(`${sliceName}/resetState`)()

@@ -1,11 +1,14 @@
 import { ContainerModule } from 'inversify'
+
 import { InfraTypes } from '~/ioc/types'
-import { CacheStorage } from '~/application/protocols/cache'
-import { TokenDecoder } from '~/application/protocols/decoder'
-import { HttpClient } from '~/application/protocols/http'
-import { LocalStorageCacheStorage } from '~/infra/cache'
-import { JWTTokenDecoder } from '~/infra/decoder'
-import { AxiosHttpClient } from '~/infra/http'
+
+import { CacheStorage } from '~/app/application/protocols/cache'
+import { TokenDecoder } from '~/app/application/protocols/decoder'
+import { HttpClient } from '~/app/application/protocols/http'
+
+import { LocalStorageCacheStorage } from '~/app/infra/cache'
+import { JWTTokenDecoder } from '~/app/infra/decoder'
+import { AxiosHttpClient } from '~/app/infra/http'
 
 const InfraClientModule = new ContainerModule((bind) => {
   bind<HttpClient>(InfraTypes.HTTP_CLIENT)

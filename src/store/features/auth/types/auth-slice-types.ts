@@ -1,6 +1,4 @@
-import { makeQueryManagementData } from '~/store/helpers'
-import { QueryManagement } from '~/store/types'
-import { TokenModel } from '~/domain/models'
+import { TokenModel } from '~/app/domain/models'
 
 export const authSliceName = 'auth' as const
 
@@ -15,9 +13,6 @@ export const AUTH_SLICE_ACTIONS = {
 } as const
 
 export const AUTH_SLICE_INITIAL_STATE: AuthSliceState = {
-  emailSignIn: {
-    ...makeQueryManagementData()
-  },
   token: {
     accessToken: '',
     expiresIn: null,
@@ -30,6 +25,5 @@ export const AUTH_SLICE_INITIAL_STATE: AuthSliceState = {
 
 export type AuthSliceState = {
   token: TokenModel
-  emailSignIn: QueryManagement<void>
   logout: boolean
 }

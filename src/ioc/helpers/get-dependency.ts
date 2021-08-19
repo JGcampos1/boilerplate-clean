@@ -1,4 +1,5 @@
 import { interfaces } from 'inversify'
+
 import { container } from '~/ioc/inversify.config'
 
 export const getDependency = <T extends unknown>(

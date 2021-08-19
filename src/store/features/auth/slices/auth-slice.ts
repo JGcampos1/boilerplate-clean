@@ -1,4 +1,5 @@
 import { SliceCaseReducers } from '@reduxjs/toolkit'
+
 import { logoutReducer, setTokenReducer } from '~/store/features/auth/actions'
 import {
   authSliceName,
@@ -8,7 +9,6 @@ import {
   SET_TOKEN
 } from '~/store/features/auth/types'
 import { createHydratedSlice } from '~/store/helpers'
-import { emailSignInReducer } from '../actions/email-sign-in'
 
 export const authSlice = createHydratedSlice<
   AuthSliceState,
@@ -20,8 +20,5 @@ export const authSlice = createHydratedSlice<
   reducers: {
     [SET_TOKEN]: setTokenReducer,
     [LOGOUT]: logoutReducer
-  },
-  extraReducers: (builder) => {
-    emailSignInReducer(builder)
   }
 })

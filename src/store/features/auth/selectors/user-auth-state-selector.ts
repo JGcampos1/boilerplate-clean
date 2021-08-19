@@ -1,7 +1,8 @@
 import { createSelector } from 'reselect'
-import { AppState } from '~/store/types'
 
-const authSliceSelector = (state: AppState) => state.auth
+import { RootState } from '~/store/types'
+
+const authSliceSelector = (state: RootState) => state.auth
 
 export const getUserAuthState = createSelector(authSliceSelector, (auth) => {
   return {

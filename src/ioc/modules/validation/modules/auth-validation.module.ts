@@ -1,7 +1,13 @@
 import { ContainerModule } from 'inversify'
+
 import { ValidationTypes } from '~/ioc/types/validation'
-import { ValidationBuilder, ValidationComposite } from '~/validation/validators'
-import { Validation } from '~/presentation/common/protocols'
+
+import {
+  ValidationBuilder,
+  ValidationComposite
+} from '~/app/validation/validators'
+
+import { Validation } from '~/app/presentation/common/protocols'
 
 export const AuthValidationModule = new ContainerModule((bind) => {
   bind<Validation>(ValidationTypes.AUTH.SIGN_IN_FORM).toConstantValue(

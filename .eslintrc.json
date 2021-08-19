@@ -4,14 +4,14 @@
       "version": "detect"
     }
   },
+  "plugins": ["react", "import-helpers", "prettier", "cypress"],
   "extends": [
     "standard-with-typescript",
     "plugin:react/recommended",
+    "plugin:cypress/recommended",
     "plugin:prettier/recommended",
-    "eslint-config-prettier",
-    "plugin:cypress/recommended"
+    "eslint-config-prettier"
   ],
-  "plugins": ["react", "import-helpers", "prettier", "cypress"],
   "parserOptions": {
     "project": "./tsconfig-eslint.json"
   },
@@ -39,20 +39,27 @@
     "react/jsx-uses-react": "error",
     "react/jsx-uses-vars": "error",
     "react/prop-types": "off",
+    "no-console": "error",
+    "no-unused-vars": [
+      "error",
+      { "vars": "all", "args": "after-used", "ignoreRestSiblings": false }
+    ],
     "import/export": "off",
     "import-helpers/order-imports": [
-      "warn",
+      "error",
       {
-        "newlinesBetween": "never",
+        "newlinesBetween": "always",
         "groups": [
           "/^react/",
           "module",
-          "/^~/domain/",
-          "/^~/application/",
-          "/^~/infra/",
-          "/^~/main/",
-          "/^~/validation/",
-          "/^~/presentation/",
+          "/^~/ioc/",
+          "/^~/store/",
+          "/^~/app/domain/",
+          "/^~/app/application/",
+          "/^~/app/infra/",
+          "/^~/app/main/",
+          "/^~/app/validation/",
+          "/^~/app/presentation/",
           ["parent", "sibling", "index"]
         ],
         "alphabetize": { "order": "asc", "ignoreCase": false }
