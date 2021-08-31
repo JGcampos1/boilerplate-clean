@@ -24,7 +24,7 @@ const AuthGate: React.FC = ({ children }) => {
   useEffect(() => {
     syncTokenToStore()
 
-    if (isAuthenticated && !isHomePage()) {
+    if (isAuthenticated && isLoginPage()) {
       history.replace(AppRoutes.home.navigate())
     }
   }, [isAuthenticated])
@@ -36,9 +36,10 @@ const AuthGate: React.FC = ({ children }) => {
     }
   }, [logoutRequested])
 
-  const isHomePage = useCallback(() => {
-    return history.location.pathname === AppRoutes.home.path
-  }, [history])
+  const isLoginPage = useCallback(
+    () => history.location.pathname === AppRoutes.login.path,
+    [history]
+  )
 
   const syncTokenToStore = useCallback(() => {
     const storedToken = cacheStorage.get<TokenModel>(tokenKey)
