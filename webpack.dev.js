@@ -6,6 +6,7 @@ const path = require('path')
 const { HotModuleReplacementPlugin } = require('webpack')
 const { merge } = require('webpack-merge')
 const common = require('./webpack.common')
+const ReactRefreshTypeScript = require('react-refresh-typescript')
 
 module.exports = merge(
   { ...common },
@@ -26,6 +27,9 @@ module.exports = merge(
           loader: 'ts-loader',
           exclude: /node_modules/,
           options: {
+            getCustomTransformers: () => ({
+              before: [ReactRefreshTypeScript()]
+            }),
             transpileOnly: true,
             experimentalWatchApi: true
           }
