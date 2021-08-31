@@ -14,3 +14,9 @@ export type Paginated<T> = {
   pageNumberIsGood: boolean
   pageSize: number
 }
+
+export type PaginatedParams = {
+  page: number
+  pageSize?: number
+  keywords?: string
+}
