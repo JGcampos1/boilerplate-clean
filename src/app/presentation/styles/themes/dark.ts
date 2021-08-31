@@ -1,8 +1,8 @@
-import { createMuiTheme, Theme } from '@material-ui/core'
+import { createTheme, Theme } from '@material-ui/core'
 import { grey } from '@material-ui/core/colors'
 
 export const makeDarkTheme = (): Theme =>
-  createMuiTheme({
+  createTheme({
     palette: {
       type: 'dark'
     },
