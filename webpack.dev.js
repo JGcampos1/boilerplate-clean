@@ -3,7 +3,6 @@ const Dotenv = require('dotenv-webpack')
 const ForkTsCheckerWebpackPlugin = require('fork-ts-checker-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const path = require('path')
-const { HotModuleReplacementPlugin } = require('webpack')
 const { merge } = require('webpack-merge')
 const common = require('./webpack.common')
 const ReactRefreshTypeScript = require('react-refresh-typescript')
@@ -24,15 +23,22 @@ module.exports = merge(
       rules: [
         {
           test: /\.ts(x?)$/,
-          loader: 'ts-loader',
-          exclude: /node_modules/,
-          options: {
-            getCustomTransformers: () => ({
-              before: [ReactRefreshTypeScript()]
-            }),
-            transpileOnly: true,
-            experimentalWatchApi: true
-          }
+          use: [
+            {
+              loader: 'ts-loader',
+              options: {
+                compilerOptions: {
+                  jsx: 'react-jsxdev'
+                },
+                transpileOnly: true,
+                experimentalWatchApi: true,
+                getCustomTransformers: () => ({
+                  before: [ReactRefreshTypeScript()]
+                })
+              }
+            }
+          ],
+          exclude: /node_modules/
         }
       ]
     },
@@ -43,18 +49,28 @@ module.exports = merge(
       runtimeChunk: true
     },
     cache: {
-      type: 'filesystem'
+      type: 'filesystem',
+      store: 'pack'
     },
-    devtool: 'eval-source-map',
+    devtool: 'inline-source-map',
     devServer: {
-      clientLogLevel: 'warning',
-      publicPath: '/',
-      contentBase: './public',
-      writeToDisk: true,
+      devMiddleware: {
+        publicPath: '/',
+        writeToDisk: true
+      },
+      client: {
+        logging: 'info',
+        overlay: {
+          errors: true,
+          warnings: false
+        },
+        progress: true
+      },
+      static: {
+        directory: path.join(__dirname, 'public')
+      },
       historyApiFallback: true,
-      port: 3000,
-      compress: true,
-      hot: true
+      port: 3000
     },
     plugins: [
       new ForkTsCheckerWebpackPlugin({
@@ -78,7 +94,6 @@ module.exports = merge(
         safe: true,
         systemvars: true
       }),
-      new HotModuleReplacementPlugin(),
       new HtmlWebpackPlugin({
         inject: true,
         template: './template.dev.html'
