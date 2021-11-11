@@ -1,4 +1,4 @@
-import { Box, Button, Typography } from '@material-ui/core'
+import { Box, Button, Typography } from '@mui/material'
 
 import { logout } from '~/store/features/auth/actions'
 import { getUserAuthState } from '~/store/features/auth/selectors'
@@ -15,11 +15,13 @@ const HomePage = () => {
 
   return (
     <Box
-      height='100%'
-      display='flex'
-      justifyContent='center'
-      alignItems='center'
-      flexDirection='column'
+      sx={{
+        height: '100%',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center',
+        flexDirection: 'column'
+      }}
     >
       <Typography variant='h1'>Hello {user.firstName}</Typography>
       <Button

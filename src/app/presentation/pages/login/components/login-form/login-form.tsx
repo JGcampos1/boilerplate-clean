@@ -1,4 +1,4 @@
-import { Box, Button } from '@material-ui/core'
+import { Box, Button } from '@mui/material'
 
 import { ValidationTypes } from '~/ioc/types/validation'
 
@@ -30,6 +30,9 @@ const LoginForm = () => {
         <form onSubmit={handleSubmit(onSubmit)}>
           <div>
             <TextInput
+              sx={{
+                pb: 2
+              }}
               name='email'
               label={'common:EMAIL'}
               autoComplete='email'
@@ -41,7 +44,11 @@ const LoginForm = () => {
               autoComplete='current-password'
             />
           </div>
-          <Box mt={1}>
+          <Box
+            sx={{
+              mt: 2
+            }}
+          >
             <Button
               type='submit'
               fullWidth

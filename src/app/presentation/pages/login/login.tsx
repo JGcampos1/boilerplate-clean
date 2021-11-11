@@ -1,32 +1,43 @@
-import { Box, IconButton, Paper, Typography } from '@material-ui/core'
+import { Box, Typography, IconButton } from '@mui/material'
 
 import { useToggleTheme, useTranslation } from '~/app/presentation/hooks'
 
 import { LoginForm } from './components'
-import { useStyles } from './login-styles'
+import { ContentContainer, RootContainer, FormContainer } from './login-styles'
 
 const LoginPage = () => {
   const { translate } = useTranslation()
-  const classes = useStyles()
 
   const { toggleTheme, type } = useToggleTheme()
 
   return (
-    <div className={classes.root}>
-      <Paper className={classes.content}>
-        <Box className={classes.form}>
-          <Typography variant='h4' align='center'>
+    <RootContainer>
+      <ContentContainer>
+        <FormContainer>
+          <Typography
+            variant='h4'
+            align='center'
+            sx={{
+              pb: 2
+            }}
+          >
             {translate('common:HELLO')}
           </Typography>
 
           <LoginForm />
 
-          <Box mt={2} display='flex' justifyContent='center'>
+          <Box
+            mt={2}
+            sx={{
+              display: 'flex',
+              justifyContent: 'center'
+            }}
+          >
             <IconButton onClick={toggleTheme}>{type}</IconButton>
           </Box>
-        </Box>
-      </Paper>
-    </div>
+        </FormContainer>
+      </ContentContainer>
+    </RootContainer>
   )
 }
 

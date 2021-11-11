@@ -1,6 +1,6 @@
 import { Controller, Control } from 'react-hook-form'
 
-import { TextField, TextFieldProps } from '@material-ui/core'
+import { TextField, TextFieldProps } from '@mui/material'
 
 import { ValidationErrorType } from '~/app/presentation/common/protocols'
 import { useTranslation } from '~/app/presentation/hooks'
@@ -28,6 +28,7 @@ const TextInput = ({ name, control, label, ...inputProps }: Props) => {
           <TextField
             {...inputProps}
             {...field}
+            value={field.value ?? ''}
             label={translate(label)}
             fullWidth
             error={invalid}

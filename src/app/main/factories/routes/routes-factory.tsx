@@ -9,7 +9,7 @@ import { IRoute } from '../../types'
 
 export const makeRoutes = (routes: IRoute[]) => {
   return routes.map((route) => {
-    const Layout = LayoutConfig[route.layout].component as React.FC
+    const Layout = LayoutConfig[route.layout].component
     if (route.routes) {
       return (
         <Route

@@ -14,5 +14,5 @@ export const useToggleTheme = (): UseToggleThemeTypes => {
     throw new Error('useToggleTheme must be used within a ThemeProvider')
   }
 
-  return { toggleTheme: context.toggleTheme, type: context.type }
+  return { toggleTheme: context.toggleTheme, type: context.mode }
 }

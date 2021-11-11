@@ -1,14 +1,16 @@
 import React from 'react'
 
-import { Box } from '@material-ui/core'
+import { Box } from '@mui/material'
 
 const BasicLayout: React.FC = ({ children }) => {
   return (
     <Box
-      width='100vw'
-      height='100vh'
-      justifyContent='center'
-      alignItems='center'
+      sx={{
+        width: '100vw',
+        height: '100vh',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
     >
       {children}
     </Box>

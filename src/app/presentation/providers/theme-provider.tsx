@@ -1,31 +1,36 @@
-import { useMemo, useState } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { MdBrightness4, MdBrightness7 } from 'react-icons/md'
 
-import { MuiThemeProvider } from '@material-ui/core'
+import { ThemeProvider as MuiThemeProvider, useMediaQuery } from '@mui/material'
 
 import { ThemeContext } from '~/app/presentation/contexts'
 import { makeDarkTheme, makeLightTheme } from '~/app/presentation/styles'
 
 const ThemeProvider: React.FC = ({ children }) => {
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)')
   const [theme, setTheme] = useState(makeLightTheme())
 
-  const {
-    palette: { type }
-  } = theme
+  useEffect(() => {
+    if (prefersDarkMode) {
+      setTheme(makeDarkTheme())
+    }
+  }, [prefersDarkMode])
 
   const toggleTheme = (): void => {
-    const newTheme = type === 'light' ? makeDarkTheme() : makeLightTheme()
+    const newTheme =
+      theme.palette.mode === 'light' ? makeDarkTheme() : makeLightTheme()
     setTheme(newTheme)
   }
 
-  const themeType = useMemo(
-    () => (type === 'light' ? <MdBrightness4 /> : <MdBrightness7 />),
-    [type]
+  const themeMode = useMemo(
+    () =>
+      theme.palette.mode === 'light' ? <MdBrightness4 /> : <MdBrightness7 />,
+    [theme.palette.mode]
   )
 
   return (
     <MuiThemeProvider theme={theme}>
-      <ThemeContext.Provider value={{ toggleTheme, type: themeType }}>
+      <ThemeContext.Provider value={{ toggleTheme, mode: themeMode }}>
         {children}
       </ThemeContext.Provider>
     </MuiThemeProvider>

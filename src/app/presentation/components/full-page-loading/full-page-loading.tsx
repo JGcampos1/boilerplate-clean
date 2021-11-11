@@ -1,15 +1,15 @@
-import React from 'react'
-
-import { Box, CircularProgress, CssBaseline } from '@material-ui/core'
+import { Box, CircularProgress, CssBaseline } from '@mui/material'
 
 const FullPageLoading = () => {
   return (
     <Box
-      width='100vw'
-      height='100vh'
-      display='flex'
-      justifyContent='center'
-      alignItems='center'
+      sx={{
+        width: '100vw',
+        height: '100vh',
+        display: 'flex',
+        justifyContent: 'center',
+        alignItems: 'center'
+      }}
     >
       <CssBaseline />
       <CircularProgress />
