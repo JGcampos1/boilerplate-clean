@@ -1,17 +1,17 @@
 module.exports = {
   roots: ['<rootDir>/src'],
   collectCoverageFrom: [
-    '<rootDir>/src/**/*.{ts,tsx}',
-    '!<rootDir>/src/main/**/*',
-    '!<rootDir>/src/presentation/components/router/**/*',
-    '!<rootDir>/src/**/index.ts',
+    '<rootDir>/src/app/**/*.{ts,tsx}',
+    '!<rootDir>/src/app/main/**/*',
+    '!<rootDir>/src/app/presentation/components/router/**/*',
+    '!<rootDir>/src/app/**/index.ts',
     '!**/*.d.ts'
   ],
   coverageDirectory: 'coverage',
-  setupFilesAfterEnv: ['<rootDir>/src/main/config/jest-setup.ts'],
+  setupFilesAfterEnv: ['<rootDir>/src/app/main/config/jest-setup.ts'],
   testPathIgnorePatterns: [
     '<rootDir>/node_modules/',
-    '<rootDir>/src/main/tests/cypress'
+    '<rootDir>/src/app/main/tests/cypress'
   ],
   testEnvironment: 'jsdom',
   transform: {
