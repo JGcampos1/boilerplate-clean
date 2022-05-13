@@ -1,3 +1,3 @@
-import { AuthApiModule } from './modules'
+import { AuthApiModule, CarsApiModule } from './modules'
 
-export const ApiModule = [AuthApiModule]
+export const ApiModule = [AuthApiModule, CarsApiModule]

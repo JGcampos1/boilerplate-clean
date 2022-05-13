@@ -3,6 +3,7 @@ export const ApiTypes = {
     EMAIL_SIGN_IN: Symbol('EmailSignIn')
   },
   CAR: {
-    CREATE_CAR: Symbol('cars')
+    CREATE_CAR: Symbol('CarsCreate'),
+    LIST_CAR: Symbol('CarsList')
   }
 }

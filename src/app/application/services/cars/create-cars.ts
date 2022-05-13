@@ -2,30 +2,30 @@ import { inject, injectable } from 'inversify'
 
 import { ApiTypes, InfraTypes } from '~/ioc/types'
 
-import { CarModel } from '~/app/domain/models'
+import { Response } from '~/app/domain/common/types'
+import { error, success } from '~/app/domain/common/utils'
 import { CreateCar } from '~/app/domain/usecases/cars'
 
 import type { HttpClient } from '~/app/application/protocols/http'
+import { RequestResponse } from '~/app/application/protocols/http/request-response'
 
 @injectable()
 export class RemoteCreateCar implements CreateCar {
   constructor(
     @inject(ApiTypes.CAR.CREATE_CAR) private readonly url: string,
     @inject(InfraTypes.HTTP_CLIENT)
-    private readonly httpClient: HttpClient<RemoteCreateCar.Model>
+    private readonly httpClient: HttpClient<void>
   ) {}
 
-  async create(params: CreateCar.Params): Promise<void> {
+  async add(params: CreateCar.Params): Promise<Response<void>> {
     const httpResponse = await this.httpClient.request({
       method: 'post',
       url: this.url,
       body: params
     })
-    // eslint-disable-next-line no-console
-    console.log(params, httpResponse)
-  }
-}
+    const ResposeOrError = RequestResponse.handle<void>(httpResponse)
+    if (ResposeOrError.isError()) return error(ResposeOrError.value)
 
-export namespace RemoteCreateCar {
-  export type Model = CarModel
+    return success(ResposeOrError.value.response as void)
+  }
 }

@@ -1,7 +1,6 @@
-export interface CreateCar {
-  create: (params: CreateCar.Params) => Promise<void>
-}
+import { AddFunction } from '~/app/domain/common/types'
 
+export interface CreateCar extends AddFunction<void, CreateCar.Params> {}
 export namespace CreateCar {
   export type Params = {
     name: string
