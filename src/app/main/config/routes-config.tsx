@@ -17,5 +17,12 @@ export const RoutesConfig: IRoute[] = [
     exact: true,
     component: lazy(async () => import('~/app/presentation/pages/login/login')),
     layout: 'DefaultLayout'
+  },
+  {
+    name: 'cars',
+    path: '/cars',
+    exact: true,
+    component: lazy(async () => import('~/app/presentation/pages/cars/cars')),
+    layout: 'DefaultLayout'
   }
 ]

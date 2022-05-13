@@ -4,7 +4,7 @@ import { generatePath } from 'react-router-dom'
 import { RoutesConfig } from '~/app/main/config/routes-config'
 
 enum RoutesNames {
-  LOGIN = 'login',
+  CARS = 'cars',
   HOME = 'home'
 }
 

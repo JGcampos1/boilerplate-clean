@@ -37,7 +37,7 @@ const AuthGate: React.FC = ({ children }) => {
   }, [logoutRequested])
 
   const isLoginPage = useCallback(
-    () => history.location.pathname === AppRoutes.login.path,
+    () => history.location.pathname === AppRoutes.cars.path,
     [history]
   )
 
