@@ -23,15 +23,7 @@ export const ListCarsContainer = styled('div')(() => ({
   marginTop: 50,
   alignItems: 'center',
   borderRadius: 10,
-  gap: 15,
-  overflow: 'auto',
-  '::-webkit-scrollbar-thumb ': {
-    background: '#888',
-    borderBox: 30
-  },
-  '::-webkit-scrollbar-thumb:hover': {
-    background: ' #555'
-  }
+  gap: 15
 }))
 export const CarsContainer = styled('div')(() => ({
   width: '100%',
@@ -40,6 +32,8 @@ export const CarsContainer = styled('div')(() => ({
   background: '#f0f0f5',
   alignItems: 'center',
   justifyContent: 'space-between',
+  borderRadius: 5,
+  padding: 5,
 
   strong: {
     color: '#383940'

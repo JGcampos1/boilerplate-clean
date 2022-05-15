@@ -2,7 +2,11 @@ import { useEffect, useState } from 'react'
 
 import { Box, Button } from '@mui/material'
 
-import { useLazyLoadCarsQuery, useTranslation } from '~/app/presentation/hooks'
+import {
+  useLazyLoadCarsQuery,
+  useTranslation,
+  useDeletCarsMutation
+} from '~/app/presentation/hooks'
 
 import {
   ContentContainer,
@@ -16,6 +20,7 @@ import { PropsModalFormCars } from './components/modal-cars-form/modal-cars-form
 const CarsPage = () => {
   const { translate } = useTranslation()
   const [loadCars, { data: cars }] = useLazyLoadCarsQuery()
+  const [deletCar] = useDeletCarsMutation()
 
   const [dataModal, setDataModal] = useState<PropsModalFormCars>({
     isVisible: false,
@@ -27,6 +32,10 @@ const CarsPage = () => {
       }))
     }
   })
+
+  const handleDeletCar = (id: string) => {
+    deletCar({ id: id })
+  }
   useEffect(() => {
     loadCars()
   }, [])
@@ -70,11 +79,7 @@ const CarsPage = () => {
                   <button
                     type='button'
                     onClick={() => {
-                      setDataModal((prevent) => ({
-                        ...prevent,
-                        idCars: null,
-                        isVisible: true
-                      }))
+                      handleDeletCar(car.id)
                     }}
                   >
                     {translate('actions.delet')}
