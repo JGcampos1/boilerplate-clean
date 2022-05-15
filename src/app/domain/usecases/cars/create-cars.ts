@@ -5,8 +5,6 @@ export namespace CreateCar {
   export type Params = {
     name: string
     placa: string
-    photo: {
-      link: string
-    }
+    photoUrl: string
   }
 }
