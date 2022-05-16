@@ -88,26 +88,28 @@ const CarsPage = () => {
                     <strong>{car.name}</strong>
                     <p>{car.placa}</p>
                   </Box>
-                  <button
-                    type='button'
-                    onClick={() => {
-                      setDataModal((prevent) => ({
-                        ...prevent,
-                        car: car,
-                        isVisible: true
-                      }))
-                    }}
-                  >
-                    {translate('actions.update')}
-                  </button>
-                  <button
-                    type='button'
-                    onClick={() => {
-                      setOpenDialog({ isVisible: true, idCar: car.id })
-                    }}
-                  >
-                    {translate('actions.delet')}
-                  </button>
+                  <Box>
+                    <button
+                      type='button'
+                      onClick={() => {
+                        setDataModal((prevent) => ({
+                          ...prevent,
+                          car: car,
+                          isVisible: true
+                        }))
+                      }}
+                    >
+                      {translate('actions.update')}
+                    </button>
+                    <button
+                      type='button'
+                      onClick={() => {
+                        setOpenDialog({ isVisible: true, idCar: car.id })
+                      }}
+                    >
+                      {translate('actions.delet')}
+                    </button>
+                  </Box>
                 </CarsContainer>
               ))}
             </ListCarsContainer>

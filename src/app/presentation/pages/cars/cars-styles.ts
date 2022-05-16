@@ -25,7 +25,7 @@ export const ListCarsContainer = styled('div')(() => ({
   borderRadius: 10,
   gap: 15
 }))
-export const CarsContainer = styled('div')(() => ({
+export const CarsContainer = styled('div')(({ theme }) => ({
   width: '100%',
   height: 100,
   display: 'flex',
@@ -42,10 +42,12 @@ export const CarsContainer = styled('div')(() => ({
   img: {
     width: 100,
     height: '100%',
-    objectFit: 'cover'
+    objectFit: 'cover',
+    borderRadius: 5
   },
+
   button: {
-    height: '70%',
+    height: '50px',
     border: 'none',
     borderRadius: 8,
     background: '#1976d2',
@@ -53,5 +55,12 @@ export const CarsContainer = styled('div')(() => ({
     fontWeight: 'bold',
     margin: '0 10px',
     padding: '0 20px'
+  },
+  [theme.breakpoints.down('sm')]: {
+    height: 'auto',
+    flexDirection: 'column',
+    padding: 20,
+    justifyContent: 'center',
+    textAlign: 'center'
   }
 }))
