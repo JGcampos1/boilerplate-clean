@@ -3,10 +3,15 @@ import { ServicesTypes } from '~/app/../ioc/types'
 import { apiSlice } from '~/app/../store/features/api/slice/api-slice'
 import { queryAdapter } from '~/app/../store/helpers'
 
-import { ListCars, CreateCar, DeletCar, UpdateCar } from '~/app/domain/usecases'
+import {
+  ListCars,
+  CreateCar,
+  DeleteCar,
+  UpdateCar
+} from '~/app/domain/usecases'
 
 const [loadCarsService, createCarsService, deletCarService, updateCarService] =
-  getDependencies<[ListCars, CreateCar, DeletCar, UpdateCar]>([
+  getDependencies<[ListCars, CreateCar, DeleteCar, UpdateCar]>([
     ServicesTypes.CAR.LIST_CAR,
     ServicesTypes.CAR.CREATE_CAR,
     ServicesTypes.CAR.DELET_CAR,
