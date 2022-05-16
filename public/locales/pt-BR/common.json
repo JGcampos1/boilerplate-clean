@@ -7,7 +7,7 @@
     "PASSWORD": "Senha",
     "actions": {
         "create": "Criar",
-        "edit": "Editar",
+        "update": "Editar",
         "delet": "Deletar",
         "enter": "Entrar"
     },

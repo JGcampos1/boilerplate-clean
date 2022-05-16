@@ -17,7 +17,7 @@ const TextInput = ({ name, control, label, ...inputProps }: Props) => {
     <Controller
       name={name}
       control={control}
-      defaultValue=''
+      defaultValue={inputProps.defaultValue}
       render={({ field, fieldState: { error, invalid } }) => {
         const errorState = error as unknown as ValidationErrorType
 

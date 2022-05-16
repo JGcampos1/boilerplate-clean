@@ -1,9 +1,13 @@
 import { Box, Button } from '@mui/material'
 
-import { CreateCar } from '~/app/domain/usecases/cars'
+import { CreateCar, UpdateCar } from '~/app/domain/usecases/cars'
 
 import { TextInput } from '~/app/presentation/components'
-import { useCreateCarsMutation, useTranslation } from '~/app/presentation/hooks'
+import {
+  useCreateCarsMutation,
+  useTranslation,
+  useUpdateCarMutation
+} from '~/app/presentation/hooks'
 import {
   Container,
   FormContainer
@@ -12,20 +16,21 @@ import { FormProvider } from '~/app/presentation/providers'
 
 export interface PropsModalFormCars {
   onClose: () => void
-  idCars?: string
+  car?: UpdateCar.Params
   isVisible: boolean
 }
-const ModalCarsForm = ({ idCars, onClose }: PropsModalFormCars) => {
+const ModalCarsForm = ({ car, onClose }: PropsModalFormCars) => {
   const [createCars] = useCreateCarsMutation()
+  const [updateCar] = useUpdateCarMutation()
   const { translate } = useTranslation()
 
   const onCreate = async (values: CreateCar.Params) => {
     createCars(values)
     onClose()
   }
-  const onUpdate = (e: any) => {
-    // eslint-disable-next-line no-console
-    console.log(e)
+  const onUpdate = (values: UpdateCar.Params) => {
+    updateCar({ ...values, id: car.id })
+    onClose()
   }
 
   const handleCloseModal = (e: any) => {
@@ -36,10 +41,13 @@ const ModalCarsForm = ({ idCars, onClose }: PropsModalFormCars) => {
 
   return (
     <Container id='modal' onClick={(e) => handleCloseModal(e)}>
-      <FormProvider mode='onBlur'>
+      <FormProvider mode='onBlur' defaultValues={car}>
         {({ handleSubmit }) => (
-          <FormContainer onSubmit={handleSubmit(idCars ? onUpdate : onCreate)}>
+          <FormContainer onSubmit={handleSubmit(car?.id ? onUpdate : onCreate)}>
             <div>
+              <h1>
+                {car?.id ? `Editar Carro de id: ${car.id}` : 'Criar Carro'}
+              </h1>
               <TextInput
                 sx={{
                   pb: 2
@@ -47,11 +55,13 @@ const ModalCarsForm = ({ idCars, onClose }: PropsModalFormCars) => {
                 name='name'
                 label={'common:NOME_CAR'}
                 autoComplete=''
+                defaultValue={car?.name}
               />
               <TextInput
                 name='placa'
                 label={'common:PLACA_CAR'}
                 type='placa'
+                defaultValue={car?.placa}
                 sx={{
                   pb: 2
                 }}
@@ -60,6 +70,7 @@ const ModalCarsForm = ({ idCars, onClose }: PropsModalFormCars) => {
                 name='photoUrl'
                 label={'common:LINK_IMAGEM_CAR'}
                 type='photoUrl'
+                defaultValue={car?.photoUrl}
               />
             </div>
             <Box

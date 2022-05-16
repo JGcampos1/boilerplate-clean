@@ -79,6 +79,18 @@ const CarsPage = () => {
                   <button
                     type='button'
                     onClick={() => {
+                      setDataModal((prevent) => ({
+                        ...prevent,
+                        car: car,
+                        isVisible: true
+                      }))
+                    }}
+                  >
+                    {translate('actions.update')}
+                  </button>
+                  <button
+                    type='button'
+                    onClick={() => {
                       handleDeletCar(car.id)
                     }}
                   >

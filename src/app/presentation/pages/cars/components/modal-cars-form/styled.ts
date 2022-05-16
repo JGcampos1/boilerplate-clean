@@ -21,5 +21,8 @@ export const FormContainer = styled('form')(() => ({
   flexDirection: 'column',
   justifyContent: 'center',
   width: '80%',
-  height: '50%'
+  height: '50%',
+  h1: {
+    color: '#383940'
+  }
 }))

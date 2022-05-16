@@ -5,6 +5,7 @@ export const ServicesTypes = {
   CAR: {
     CREATE_CAR: Symbol('CarsCreate'),
     LIST_CAR: Symbol('CarsList'),
-    DELET_CAR: Symbol('CarDelet')
+    DELET_CAR: Symbol('CarDelet'),
+    UPDATE_CAR: Symbol('CarUpdate')
   }
 }

@@ -5,5 +5,6 @@ export const { useEmailSignInMutation } = authApi
 export const {
   useLazyLoadCarsQuery,
   useCreateCarsMutation,
-  useDeletCarsMutation
+  useDeletCarsMutation,
+  useUpdateCarMutation
 } = carsApi
