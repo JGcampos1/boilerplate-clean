@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 
-import { Box, Button } from '@mui/material'
+import { Box, Button, Dialog, DialogActions, DialogTitle } from '@mui/material'
 
 import {
   useLazyLoadCarsQuery,
@@ -17,10 +17,18 @@ import {
 import { ModalFormCars } from './components'
 import { PropsModalFormCars } from './components/modal-cars-form/modal-cars-form'
 
+type DialogProps = {
+  isVisible: boolean
+  idCar?: string
+}
+
 const CarsPage = () => {
   const { translate } = useTranslation()
   const [loadCars, { data: cars }] = useLazyLoadCarsQuery()
   const [deletCar] = useDeletCarsMutation()
+  const [openDialog, setOpenDialog] = useState<DialogProps>({
+    isVisible: false
+  })
 
   const [dataModal, setDataModal] = useState<PropsModalFormCars>({
     isVisible: false,
@@ -32,9 +40,12 @@ const CarsPage = () => {
       }))
     }
   })
-
+  const handleCloseDialog = () => {
+    setOpenDialog({ isVisible: false, idCar: null })
+  }
   const handleDeletCar = (id: string) => {
     deletCar({ id: id })
+    handleCloseDialog()
   }
   useEffect(() => {
     loadCars()
@@ -70,7 +81,8 @@ const CarsPage = () => {
                     sx={{
                       display: 'flex',
                       flexDirection: 'column',
-                      flex: 1
+                      flex: 1,
+                      padding: '10px'
                     }}
                   >
                     <strong>{car.name}</strong>
@@ -91,7 +103,7 @@ const CarsPage = () => {
                   <button
                     type='button'
                     onClick={() => {
-                      handleDeletCar(car.id)
+                      setOpenDialog({ isVisible: true, idCar: car.id })
                     }}
                   >
                     {translate('actions.delet')}
@@ -99,6 +111,28 @@ const CarsPage = () => {
                 </CarsContainer>
               ))}
             </ListCarsContainer>
+
+            <Dialog
+              open={openDialog.isVisible}
+              onClose={handleCloseDialog}
+              aria-labelledby='alert-dialog-title'
+              aria-describedby='alert-dialog-description'
+            >
+              <DialogTitle id='alert-dialog-title'>
+                {'Deseja mesmo deletar esse carro?'}
+              </DialogTitle>
+              <DialogActions>
+                <Button onClick={handleCloseDialog}>Cancelar</Button>
+                <Button
+                  onClick={() => {
+                    handleDeletCar(openDialog.idCar)
+                  }}
+                  autoFocus
+                >
+                  Deletar
+                </Button>
+              </DialogActions>
+            </Dialog>
           </>
         </ContentContainer>
       </>

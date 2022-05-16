@@ -38,11 +38,7 @@ export const CarsContainer = styled('div')(() => ({
   strong: {
     color: '#383940'
   },
-  'p,strong': {
-    padding: 10,
-    maxWidth: 100,
-    minHeight: 30
-  },
+
   img: {
     width: 100,
     height: '100%',
@@ -54,6 +50,8 @@ export const CarsContainer = styled('div')(() => ({
     borderRadius: 8,
     background: '#1976d2',
     color: 'white',
-    fontWeight: 'bold'
+    fontWeight: 'bold',
+    margin: '0 10px',
+    padding: '0 20px'
   }
 }))
