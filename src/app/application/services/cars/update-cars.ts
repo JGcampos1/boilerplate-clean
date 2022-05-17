@@ -18,8 +18,6 @@ export class RemoteUpdateCar implements UpdateCar {
   ) {}
 
   async update(params: UpdateCar.Params): Promise<Response<void>> {
-    // eslint-disable-next-line no-console
-    console.log('update-carsApi,', params)
     const httpResponse = await this.httpClient.request({
       method: 'put',
       url: `${this.url}/${params.id}`,
