@@ -13,7 +13,7 @@ const ProtectRoute: React.FC<Props> = (props) => {
   const { private: isPrivate, Layout } = props
   const { isAuthenticated } = useAuth()
 
-  if (!props.component) return <Redirect to={AppRoutes.login.path} />
+  if (!props.component) return <Redirect to={AppRoutes.cars.path} />
 
   if (isPrivate) {
     return (
@@ -23,7 +23,7 @@ const ProtectRoute: React.FC<Props> = (props) => {
         ) : (
           <Route
             {...props}
-            component={() => <Redirect to={AppRoutes.login.path} />}
+            component={() => <Redirect to={AppRoutes.cars.path} />}
           />
         )}
       </Layout>

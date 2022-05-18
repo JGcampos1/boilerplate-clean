@@ -19,7 +19,6 @@ export const authApi = apiSlice.injectEndpoints({
       queryFn: async (params) => queryAdapter(emailSignInService.auth(params)),
       onQueryStarted: async (_params, { queryFulfilled, dispatch }) => {
         const response = await queryFulfilled
-
         dispatch(setToken(response.data))
       }
     })
